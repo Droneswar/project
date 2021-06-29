@@ -1,0 +1,6 @@
+customhost = "project.cyy7fpkhz3pq.us-east-1.rds.amazonaws.com"
+customuser = "project"
+custompass = "driveready"
+customdb = "student"
+custombucket = "project-driveready"
+customregion = "us-east-1"
