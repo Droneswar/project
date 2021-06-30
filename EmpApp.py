@@ -47,12 +47,12 @@ def AddStudent():
         db_conn.commit()
         student_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
-        student_image_file_name_in_s3 = "roll-no-" + str(emp_id) + "_image_file"
+        student_image_file_name_in_s3 = "roll-no-" + str(roll_no) + "_image_file"
         s3 = boto3.resource('s3')
 
         try:
             print("Data inserted in MySQL RDS... uploading image to S3...")
-            s3.Bucket(custombucket).put_object(Key=student_image_file_name_in_s3, Body=emp_image_file)
+            s3.Bucket(custombucket).put_object(Key=student_image_file_name_in_s3, Body=student_image_file)
             bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
             s3_location = (bucket_location['LocationConstraint'])
 
