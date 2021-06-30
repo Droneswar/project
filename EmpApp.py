@@ -37,8 +37,10 @@ def AddStudent():
 
     insert_sql = "INSERT INTO student VALUES (%s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
-
-    if student_image_file.filename == "":
+    
+    if roll_no=="" or first_name=="" or last_name=="" or branch=="" or college=="":
+        return "Please enter details" 
+    else if student_image_file.filename == "":
         return "Please select a file"
 
     try:
@@ -74,6 +76,17 @@ def AddStudent():
 
     print("all modification done...")
     return render_template('AddStudentOutput.html', name=student_name)
+
+@app.route("/getstudent",methods=['GET','POST'])
+def GetStudent():
+    return render_template('GetStudent.html')
+
+@app.route("/fetchdata",methods=['GET','POST'])
+def GetStudent(roll_no):
+    cur = mysql.connection.cursor() 
+    cur.execute("""SELECT * FROM student_data WHERE roll_no = %s""", (roll_no,))
+    GetStudent = cur.fetchone()
+    return render_template('GetStudentOutput.html', roll_no = GetStudent)
 
 
 if __name__ == '__main__':
