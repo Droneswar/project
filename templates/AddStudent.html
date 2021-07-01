@@ -3,7 +3,7 @@
 <head>
 	<title>Add Student Information</title>
 </head>
-{% with messages = get_flashes_messages(with_categories=true) %}
+{% with messages = get_flashed_messages(with_categories=true) %}
 {% if messages %}
 	{% for message in messages %}
 	<div class="alert alert-danger alter-dismissable fade show" role="alert">
