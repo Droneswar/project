@@ -98,6 +98,7 @@ def GetStudent():
         flash('Details not found.', category='error')
     bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
     s3_location = (bucket_location['LocationConstraint'])
+    student_image_file_name_in_s3 = "roll-no-" + str(roll_no) + "_image_file"
     object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
                 s3_location,
                 custombucket,
