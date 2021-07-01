@@ -3,8 +3,9 @@
 <head>
 	<title>Add Student Information</title>
 </head>
-{% with messages = get_flashed_messages(with_categories=true) %}
-{% if messages %}
+<center>
+	{% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
 	{% for message in messages %}
 	<div class="alert alert-danger alter-dismissable fade show" role="alert">
 	{{ message }}
@@ -13,9 +14,8 @@
 	</button>
 	</div>
 	{% endfor %}
-{% endif %}
-{% endwith %}
-<center>
+        {% endif %}
+        {% endwith %}
 	<font color="black" size="4" style="font-family: avenir">
 
 		<h1 style="color: DodgerBlue">Student Database</h1>
