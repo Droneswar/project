@@ -3,6 +3,7 @@
 <head>
 	<title>Add Student Information</title>
 </head>
+{% with messages = get_}
 <center>
 	<font color="black" size="4" style="font-family: avenir">
 
@@ -12,7 +13,7 @@
 
 			<form action="/addstudent" autocomplete="on" method = "POST" enctype="multipart/form-data">
 
-				<button type="submit" formaction="/getemp" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">GET STUDENT INFORMATION</button><br><br>
+				<button type="submit" formaction="/getstudent" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">GET STUDENT INFORMATION</button><br><br>
 
 		  		Roll No:<br> <input style="height:25px;font-size:14pt; color:grey;" type="text" name="roll_no" autofocus size="40"><br><br>
 
