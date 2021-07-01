@@ -83,7 +83,7 @@ def GetStudent():
 
 @app.route("/fetchdata",methods=['GET','POST'])
 def GetStudent():
-    roll_no=request.form('roll_no')
+    roll_no=request.form['roll_no']
     try:
         cur = mysql.connection.cursor() 
         cur.execute("""SELECT * FROM student_data WHERE roll_no = %s""", (roll_no,))
