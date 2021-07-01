@@ -40,7 +40,7 @@ def AddStudent():
     
     if roll_no=="" or first_name=="" or last_name=="" or branch=="" or college=="":
         flash('Please enter full details.',category='error')
-    else if student_image_file.filename == "":
+    elif student_image_file.filename == "":
         flash('Please upload image file.',category='error')
 
     try:
