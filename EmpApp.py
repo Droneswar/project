@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,flash
 from pymysql import connections
 import os
 import boto3
@@ -39,9 +39,9 @@ def AddStudent():
     cursor = db_conn.cursor()
     
     if roll_no=="" or first_name=="" or last_name=="" or branch=="" or college=="":
-        return "Please enter details" 
+        flash('Please enter full details.',category='error')
     else if student_image_file.filename == "":
-        return "Please select a file"
+        flash('Please upload image file.',category='error')
 
     try:
 
@@ -82,11 +82,27 @@ def GetStudent():
     return render_template('GetStudent.html')
 
 @app.route("/fetchdata",methods=['GET','POST'])
-def GetStudent(roll_no):
-    cur = mysql.connection.cursor() 
-    cur.execute("""SELECT * FROM student_data WHERE roll_no = %s""", (roll_no,))
-    GetStudent = cur.fetchone()
-    return render_template('GetStudentOutput.html', roll_no = GetStudent)
+def GetStudent():
+    roll_no=request.form('roll_no')
+    try:
+        cur = mysql.connection.cursor() 
+        cur.execute("""SELECT * FROM student_data WHERE roll_no = %s""", (roll_no,))
+        Student = cur.fetchall()
+        for row in student:
+            roll = row[0]
+            fname = row[1]
+            lname = row[2]
+            branch = row[3]
+            college = row[4]
+    else:
+        flash('Details not found.', category='error')
+    bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+    s3_location = (bucket_location['LocationConstraint'])
+    object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+                s3_location,
+                custombucket,
+                student_image_file_name_in_s3)
+    return render_template('GetStudentOutput.html', roll_no =roll, fname=fname, lname=lname, branch=branch, college=college, image_url=object_url )
 
 
 if __name__ == '__main__':
