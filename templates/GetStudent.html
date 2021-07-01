@@ -3,6 +3,17 @@
 <head>
 	<title>Get Student Information</title>
 </head>
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+	{% for message in messages %}
+	<div class="alert alert-danger alter-dismissable fade show" role="alert">
+	{{ message }}
+	<button type="button" class="close" data-dismiss="alert">
+	<span aria-hidden="true">&times;</span>
+	</button>
+	</div>
+{% endif %}
+{% endwith %
 <center>
 	<font color="black" size="5" style="font-family: avenir">
 
